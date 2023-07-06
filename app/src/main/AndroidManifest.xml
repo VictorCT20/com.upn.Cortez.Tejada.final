@@ -25,6 +25,9 @@
         android:theme="@style/Theme.ComupnCortezTejada"
         tools:targetApi="31">
         <activity
+            android:name=".RegistroDuelistaActivity"
+            android:exported="false" />
+        <activity
             android:name=".ListaCartaActivity"
             android:exported="false" />
         <activity
