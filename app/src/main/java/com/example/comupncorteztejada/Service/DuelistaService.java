@@ -16,22 +16,23 @@ import retrofit2.http.Query;
 
 public interface DuelistaService {
     @GET("Duelistas")
-    Call<List<Duelista>> getAllUser(@Query("limit") int limit, @Query("page") int page);
+    Call<List<Duelista>> getAllDuelista(@Query("limit") int limit, @Query("page") int page);
 
     @GET("Duelistas/{id}")
-    Call<Duelista> findUser(@Path("id") int id);
+    Call<Duelista> findDuelista(@Path("id") int id);
+
+    @POST("image")
+    Call<ImageResponse> subirImagen(@Body ImageToSave imagen);
+
+    @DELETE("Duelistas/{id}")
+    Call<Void> delete(@Path("id") int id);
+
 
     @POST("Duelistas")
     Call<Duelista> create(@Body Duelista duelista);
 
     @PUT("Duelistas/{id}")
     Call<Duelista> update(@Path("id") int id, @Body Duelista duelista);
-
-    @DELETE("Duelistas/{id}")
-    Call<Void> delete(@Path("id") int id);
-
-    @POST("image")
-    Call<ImageResponse> subirImagen(@Body ImageToSave imagen);
 
     class ImageResponse {
         @SerializedName("url")
