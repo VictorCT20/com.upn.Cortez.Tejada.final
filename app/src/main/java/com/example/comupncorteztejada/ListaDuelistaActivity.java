@@ -50,7 +50,7 @@ public class ListaDuelistaActivity extends AppCompatActivity {
         mRvListaDuel.setAdapter(mAdapter);
 
         Button btnActualizar = findViewById(R.id.bttnActualizarD);
-        Button btnGoBack = findViewById(R.id.bttnRegistroD);
+        Button btnRegistro = findViewById(R.id.bttnRegistroD);
 
         mRvListaDuel.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -89,10 +89,10 @@ public class ListaDuelistaActivity extends AppCompatActivity {
             }
         });
 
-        btnGoBack.setOnClickListener(new View.OnClickListener() {
+        btnRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =  new Intent(ListaDuelistaActivity.this, MainActivity.class);
+                Intent intent =  new Intent(ListaDuelistaActivity.this, RegistroDuelistaActivity.class);
                 startActivity(intent);
                 finish();
             }
