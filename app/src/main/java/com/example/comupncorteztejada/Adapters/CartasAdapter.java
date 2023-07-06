@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.comupncorteztejada.DetalleCartaActivity;
 import com.example.comupncorteztejada.DetalleDuelistaActivity;
 import com.example.comupncorteztejada.Entities.Cartas;
+import com.example.comupncorteztejada.MapsActivity;
 import com.example.comupncorteztejada.R;
 import com.squareup.picasso.Picasso;
 
@@ -63,7 +64,7 @@ public class CartasAdapter extends RecyclerView.Adapter {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =  new Intent(context, DetalleCartaActivity.class);
+                Intent intent =  new Intent(context, MapsActivity.class);
                 intent.putExtra("position", carta.getId());
                 context.startActivity(intent);
             }

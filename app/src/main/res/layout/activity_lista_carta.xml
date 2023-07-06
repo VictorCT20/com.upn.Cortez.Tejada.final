@@ -27,7 +27,7 @@
         </androidx.recyclerview.widget.RecyclerView>
 
         <Button
-            android:id="@+id/bttnRegistroC"
+            android:id="@+id/bttnVolverC"
             android:layout_width="wrap_content"
             android:layout_height="58dp"
             android:text="Registrar" />

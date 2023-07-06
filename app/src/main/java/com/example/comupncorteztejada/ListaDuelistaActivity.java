@@ -17,6 +17,7 @@ import com.example.comupncorteztejada.BD.AppDatabase;
 import com.example.comupncorteztejada.Entities.Duelista;
 import com.example.comupncorteztejada.Repositories.DuelistaRepository;
 import com.example.comupncorteztejada.Service.DuelistaService;
+import com.example.comupncorteztejada.Utilities.RetrofitU;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -127,6 +128,8 @@ public class ListaDuelistaActivity extends AppCompatActivity {
 
         AppDatabase db = AppDatabase.getInstance(context);
         db.clearAllTables();
+
+        mRetrofit = RetrofitU.build();
 
         DuelistaService service = mRetrofit.create(DuelistaService.class);
         service.getAllDuelista(50, nextPage).enqueue(new Callback<List<Duelista>>() {

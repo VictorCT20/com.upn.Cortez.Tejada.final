@@ -53,6 +53,23 @@ public class DetalleDuelistaActivity extends AppCompatActivity {
 
         tvNombre.setText(duelista1.getNombre());
 
+        bttnRegistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(DetalleDuelistaActivity.this, RegistroCartasActivity.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
+            }
+        });
+
+        bttnVerM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(DetalleDuelistaActivity.this, ListaCartaActivity.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
+            }
+        });
 
         bttnSincro.setOnClickListener(new View.OnClickListener() {
             @Override
