@@ -1,13 +1,16 @@
 package com.example.comupncorteztejada.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.comupncorteztejada.DetalleDuelistaActivity;
 import com.example.comupncorteztejada.Entities.Duelista;
 import com.example.comupncorteztejada.R;
 
@@ -27,7 +30,7 @@ public class DuelistaAdapter extends RecyclerView.Adapter {
         NameViewHolder viewHolder;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         if(viewType == 1) {
-            View view = inflater.inflate(R.layout.item_string, parent, false);
+            View view = inflater.inflate(R.layout.item_duelista, parent, false);
             viewHolder = new NameViewHolder(view);
         } else {
             View view = inflater.inflate(R.layout.item_progressbar, parent, false);
@@ -39,7 +42,24 @@ public class DuelistaAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        Duelista duelista = duelistas.get(position);
 
+        if(duelista == null) return;
+
+        View view = holder.itemView;
+
+        TextView tvName = view.findViewById(R.id.tvDuelistaName);
+        tvName.setText(duelista.getNombre());
+
+        //evita el uso de un boton "ver detalle"
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(context, DetalleDuelistaActivity.class);
+                intent.putExtra("position", duelista.getId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
