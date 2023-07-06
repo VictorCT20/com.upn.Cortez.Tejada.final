@@ -4,6 +4,9 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
 
+import com.example.comupncorteztejada.BD.AppDatabase;
+import com.example.comupncorteztejada.Entities.Cartas;
+import com.example.comupncorteztejada.Repositories.CartasRepository;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -16,18 +19,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
+    Cartas cartas = new Cartas(); //crear pokemon
+    private double latitud;
+    private double longitud;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMapsBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        int position = getIntent().getIntExtra("position", 0);
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+
+        AppDatabase db = AppDatabase.getInstance(this);
+        CartasRepository repository = db.cartasRepository();
+        cartas = repository.findCartasById(position);
+
+        if(cartas!= null){
+            latitud = Double.parseDouble(cartas.getLati());
+            longitud = Double.parseDouble(cartas.getLongi());
+
+            binding = ActivityMapsBinding.inflate(getLayoutInflater());
+            setContentView(binding.getRoot());
+
+            // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.map);
+            mapFragment.getMapAsync(this);
+        }
     }
 
     /**
@@ -44,8 +62,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        LatLng sydney = new LatLng(latitud, longitud);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("A " + cartas.getNombre()));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
